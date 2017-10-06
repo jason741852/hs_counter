@@ -10,6 +10,7 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://unpkg.com/vue"></script>
+  <script type="text/javascript" src="/static/js/defiant.min.js"></script>
 
 
 
@@ -17,11 +18,14 @@
 
 <body>
   <p>Fill out the cards you have to calculate the damage from hand</p>
-  <form id="cards_in_hands">
+  <form id="cards_in_hands" onsubmit="return false">
     <div id="card_inputs">
     </div>
     <input type="submit" value="calculate" href="/">
   </form>
+
+  <span id="test">Message: {{ msg }}</span>
+
   <script type="text/javascript" src="/static/js/index.js"></script>
 </body>
 </html>

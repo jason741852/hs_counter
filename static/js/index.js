@@ -15,6 +15,7 @@ $.ajax({
   async: false,
   success: function(data) {
     cards = data;
+    console.log(cards);
     cards_Basic = cards['Basic'];
     cards_Classic = cards['Classic'];
     cards_JTU = cards['Journey to Un\'Goro'];
@@ -60,16 +61,39 @@ for(i=0; i<card_names.length; i++){
 var parent = document.getElementById("card_inputs");
 for(j=0; j<10; j++){
   var input = document.createElement("input");
+  var input_id = 'input'+j.toString();
   input.setAttribute('type', 'text');
+  input.setAttribute('id', input_id);
   input.setAttribute('list', 'card-name-list')
   parent.appendChild(input);
   parent.appendChild(datalist);
 }
 
+var msg = {msg: 'Vue.js is rad'};
+var output = new Vue({ el: '#test', data: msg});
 
 
 $(document).ready(function(e) {
   $('form#cards_in_hands').submit(function() {
-    console.log(e);
+    var hand = new Array;
+    for(i=0;i<10;i++){
+      var input_id = 'input'+i.toString();
+      if (document.getElementById(input_id).value != ""){
+        hand.push(JSON.search(cards, '//*[contains(name, "' + document.getElementById(input_id).value + '")]'));
+      }
+    }
+    console.log(hand);
+    var card_to_search = hand[0]
+    console.log(hand[0][0].name);
+    console.log(hand[1][0].name);
+
+     msg.msg = document.getElementById("input1").value;
   });
+
+})
+
+
+// Input: card name; Output: card object
+$(function search(card_name){
+
 })
