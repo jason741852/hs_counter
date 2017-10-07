@@ -11,20 +11,32 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://unpkg.com/vue"></script>
   <script type="text/javascript" src="/static/js/defiant.min.js"></script>
-
-
+  <script type="text/javascript" src="/static/bootstrap/js/popper.min.js"></script>
+  <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-grid.min.css">
+  <link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-reboot.min.css">
+  <link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/custom.css">
 
 </head>
 
 <body>
-  <p>Fill out the cards you have to calculate the damage from hand</p>
-  <form id="cards_in_hands" onsubmit="return false">
-    <div id="card_inputs">
-    </div>
-    <input id="submit" type="submit" value="calculate" href="/">
-  </form>
+  <!--------------------------------- NavBar Section --------------------------------->
+  <nav class="navbar navbar-light bg-faded">
+    <h1 class="navbar-brand" href="#" style="color: white">Anduin Damage Calculator</h1>
+  </nav>
 
-  <span id="test">Message: {{ msg }}</span>
+  <div class="container">
+  <p>Fill out the cards you have to calculate the damage from hand</p>
+
+    <form id="cards_in_hands" onsubmit="return false">
+      <div id="card_inputs">
+      </div>
+      <input id="submit" type="submit" value="calculate" href="/">
+    </form>
+    <span id="test">Message: {{ msg }}</span>
+  </div>
+
 
   <script type="text/javascript" src="/static/js/index.js"></script>
 </body>

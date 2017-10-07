@@ -62,14 +62,38 @@ $(document).ready(function(e) {
 
   var parent = document.getElementById("card_inputs");
   for(j=0; j<10; j++){
+    if(j%5 == 0){
+      var row_div = document.createElement("div");
+      row_div.setAttribute('class', 'row');
+      parent.appendChild(row_div);
+    }
+    var col_div = document.createElement("div");
+    col_div.setAttribute('class', 'col-lg-15');
+    row_div.appendChild(col_div);
+
+    var img = document.createElement("img");
+    var img_id = 'img'+j.toString();
+    var img_src = 'imageLink'+j.toString();
+
     var input = document.createElement("input");
     var input_id = 'input'+j.toString();
     input.setAttribute('type', 'text');
     input.setAttribute('id', input_id);
+    input.setAttribute('v-model', img_src);
     input.setAttribute('list', 'card-name-list')
-    parent.appendChild(input);
-    parent.appendChild(datalist);
+    col_div.appendChild(input);
+    col_div.appendChild(datalist);
+
+    img.setAttribute('id', img_id);
+    img.setAttribute('class', "img-fluid");
+    img.setAttribute(':src', img_src);
+    //img.setAttribute('src', "/static/images/card-back-default.png");
+    col_div.appendChild(img);
+
   }
+
+  var imageLink0 = {imageLink0: "/static/images/card-back-default.png"};
+  var ayy = new Vue({ el: '#img0', data: imageLink0});
 
   var msg = {msg: 'Vue.js is rad'};
   var output = new Vue({ el: '#test', data: msg});
