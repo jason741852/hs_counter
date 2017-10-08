@@ -1,3 +1,20 @@
+body, html {
+    height: 100%;
+}
+
+
+body{
+  background-image: url("../images/background.jpg");
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
 .navbar{
   background-image: url("../images/navBarImage.jpg");
   background-repeat: no-repeat;
@@ -44,4 +61,14 @@
         width: 20%;
         float: left;
     }
+}
+
+.container{
+  border: 2px solid red;
+  border-radius: 5px;
+  margin-top:80px;
+}
+
+.buffer{
+  margin-top:80px;
 }

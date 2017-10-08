@@ -64,11 +64,13 @@ $(document).ready(function(e) {
   for(j=0; j<10; j++){
     if(j%5 == 0){
       var row_div = document.createElement("div");
-      row_div.setAttribute('class', 'row');
+      row_div.setAttribute('class', 'row top-buffer');
       parent.appendChild(row_div);
     }
     var col_div = document.createElement("div");
+    var col_id = 'col'+j.toString();
     col_div.setAttribute('class', 'col-lg-15');
+    col_div.setAttribute('id', col_id);
     row_div.appendChild(col_div);
 
     var img = document.createElement("img");
@@ -79,7 +81,7 @@ $(document).ready(function(e) {
     var input_id = 'input'+j.toString();
     input.setAttribute('type', 'text');
     input.setAttribute('id', input_id);
-    input.setAttribute('v-model', img_src);
+    input.setAttribute('v-model', "cardSelector");
     input.setAttribute('list', 'card-name-list')
     col_div.appendChild(input);
     col_div.appendChild(datalist);
@@ -92,8 +94,338 @@ $(document).ready(function(e) {
 
   }
 
-  var imageLink0 = {imageLink0: "/static/images/card-back-default.png"};
-  var ayy = new Vue({ el: '#img0', data: imageLink0});
+
+
+  var bindImage0 = new Vue({
+    el: '#col0',
+    data: {
+      imageLink0: "/static/images/card-back-default.png",
+      cardSelector: ""
+    },
+    watch: {
+      cardSelector: function(newCardImage){
+        console.log("function triggered");
+        this.getImage()
+      }
+    },
+    methods:{
+      getImage: _.debounce(
+        function(){
+          console.log("function triggered");
+          console.log(document.getElementById("input0").value);
+          if (document.getElementById("input0").value != ""){
+            //console.log(i + " is good");
+            var newImage = JSON.search(cards, '//*[contains(name, "' + document.getElementById("input0").value + '")]');
+            //console.log(newImage[0].cardId);
+            var newImagePath = "/static/images/card_images/" + newImage[0].cardId + ".png";
+            console.log(newImagePath);
+
+          }
+
+          this.imageLink0 = newImagePath;
+        },
+        100
+      )
+    }
+  });
+
+  var bindImage1 = new Vue({
+    el: '#col1',
+    data: {
+      imageLink1: "/static/images/card-back-default.png",
+      cardSelector: ""
+    },
+    watch: {
+      cardSelector: function(newCardImage){
+        console.log("function triggered");
+        this.getImage()
+      }
+    },
+    methods:{
+      getImage: _.debounce(
+        function(){
+          console.log("function triggered");
+          console.log(document.getElementById("input1").value);
+          if (document.getElementById("input1").value != ""){
+            //console.log(i + " is good");
+            var newImage = JSON.search(cards, '//*[contains(name, "' + document.getElementById("input1").value + '")]');
+            //console.log(newImage[0].cardId);
+            var newImagePath = "/static/images/card_images/" + newImage[0].cardId + ".png";
+            console.log(newImagePath);
+
+          }
+
+          this.imageLink1 = newImagePath;
+        },
+        100
+      )
+    }
+  });
+
+  var bindImage2 = new Vue({
+    el: '#col2',
+    data: {
+      imageLink2: "/static/images/card-back-default.png",
+      cardSelector: ""
+    },
+    watch: {
+      cardSelector: function(newCardImage){
+        console.log("function triggered");
+        this.getImage()
+      }
+    },
+    methods:{
+      getImage: _.debounce(
+        function(){
+          console.log("function triggered");
+          console.log(document.getElementById("input2").value);
+          if (document.getElementById("input2").value != ""){
+            //console.log(i + " is good");
+            var newImage = JSON.search(cards, '//*[contains(name, "' + document.getElementById("input2").value + '")]');
+            //console.log(newImage[0].cardId);
+            var newImagePath = "/static/images/card_images/" + newImage[0].cardId + ".png";
+            console.log(newImagePath);
+
+          }
+
+          this.imageLink2 = newImagePath;
+        },
+        100
+      )
+    }
+  });
+
+  var bindImage3 = new Vue({
+    el: '#col3',
+    data: {
+      imageLink3: "/static/images/card-back-default.png",
+      cardSelector: ""
+    },
+    watch: {
+      cardSelector: function(newCardImage){
+        console.log("function triggered");
+        this.getImage()
+      }
+    },
+    methods:{
+      getImage: _.debounce(
+        function(){
+          console.log("function triggered");
+          console.log(document.getElementById("input3").value);
+          if (document.getElementById("input3").value != ""){
+            //console.log(i + " is good");
+            var newImage = JSON.search(cards, '//*[contains(name, "' + document.getElementById("input3").value + '")]');
+            //console.log(newImage[0].cardId);
+            var newImagePath = "/static/images/card_images/" + newImage[0].cardId + ".png";
+            console.log(newImagePath);
+
+          }
+
+          this.imageLink3 = newImagePath;
+        },
+        100
+      )
+    }
+  });
+
+  var bindImage4 = new Vue({
+    el: '#col4',
+    data: {
+      imageLink4: "/static/images/card-back-default.png",
+      cardSelector: ""
+    },
+    watch: {
+      cardSelector: function(newCardImage){
+        console.log("function triggered");
+        this.getImage()
+      }
+    },
+    methods:{
+      getImage: _.debounce(
+        function(){
+          console.log("function triggered");
+          console.log(document.getElementById("input4").value);
+          if (document.getElementById("input4").value != ""){
+            //console.log(i + " is good");
+            var newImage = JSON.search(cards, '//*[contains(name, "' + document.getElementById("input4").value + '")]');
+            //console.log(newImage[0].cardId);
+            var newImagePath = "/static/images/card_images/" + newImage[0].cardId + ".png";
+            console.log(newImagePath);
+
+          }
+
+          this.imageLink4 = newImagePath;
+        },
+        100
+      )
+    }
+  });
+
+  var bindImage5 = new Vue({
+    el: '#col5',
+    data: {
+      imageLink5: "/static/images/card-back-default.png",
+      cardSelector: ""
+    },
+    watch: {
+      cardSelector: function(newCardImage){
+        console.log("function triggered");
+        this.getImage()
+      }
+    },
+    methods:{
+      getImage: _.debounce(
+        function(){
+          console.log("function triggered");
+          console.log(document.getElementById("input5").value);
+          if (document.getElementById("input5").value != ""){
+            //console.log(i + " is good");
+            var newImage = JSON.search(cards, '//*[contains(name, "' + document.getElementById("input5").value + '")]');
+            //console.log(newImage[0].cardId);
+            var newImagePath = "/static/images/card_images/" + newImage[0].cardId + ".png";
+            console.log(newImagePath);
+
+          }
+
+          this.imageLink5 = newImagePath;
+        },
+        100
+      )
+    }
+  });
+
+  var bindImage6 = new Vue({
+    el: '#col6',
+    data: {
+      imageLink6: "/static/images/card-back-default.png",
+      cardSelector: ""
+    },
+    watch: {
+      cardSelector: function(newCardImage){
+        console.log("function triggered");
+        this.getImage()
+      }
+    },
+    methods:{
+      getImage: _.debounce(
+        function(){
+          console.log("function triggered");
+          console.log(document.getElementById("input6").value);
+          if (document.getElementById("input6").value != ""){
+            //console.log(i + " is good");
+            var newImage = JSON.search(cards, '//*[contains(name, "' + document.getElementById("input6").value + '")]');
+            //console.log(newImage[0].cardId);
+            var newImagePath = "/static/images/card_images/" + newImage[0].cardId + ".png";
+            console.log(newImagePath);
+
+          }
+
+          this.imageLink6 = newImagePath;
+        },
+        100
+      )
+    }
+  });
+
+  var bindImage7 = new Vue({
+    el: '#col7',
+    data: {
+      imageLink7: "/static/images/card-back-default.png",
+      cardSelector: ""
+    },
+    watch: {
+      cardSelector: function(newCardImage){
+        console.log("function triggered");
+        this.getImage()
+      }
+    },
+    methods:{
+      getImage: _.debounce(
+        function(){
+          console.log("function triggered");
+          console.log(document.getElementById("input7").value);
+          if (document.getElementById("input7").value != ""){
+            //console.log(i + " is good");
+            var newImage = JSON.search(cards, '//*[contains(name, "' + document.getElementById("input7").value + '")]');
+            //console.log(newImage[0].cardId);
+            var newImagePath = "/static/images/card_images/" + newImage[0].cardId + ".png";
+            console.log(newImagePath);
+
+          }
+
+          this.imageLink7 = newImagePath;
+        },
+        100
+      )
+    }
+  });
+
+  var bindImage8 = new Vue({
+    el: '#col8',
+    data: {
+      imageLink8: "/static/images/card-back-default.png",
+      cardSelector: ""
+    },
+    watch: {
+      cardSelector: function(newCardImage){
+        console.log("function triggered");
+        this.getImage()
+      }
+    },
+    methods:{
+      getImage: _.debounce(
+        function(){
+          console.log("function triggered");
+          console.log(document.getElementById("input8").value);
+          if (document.getElementById("input8").value != ""){
+            //console.log(i + " is good");
+            var newImage = JSON.search(cards, '//*[contains(name, "' + document.getElementById("input8").value + '")]');
+            //console.log(newImage[0].cardId);
+            var newImagePath = "/static/images/card_images/" + newImage[0].cardId + ".png";
+            console.log(newImagePath);
+
+          }
+
+          this.imageLink8 = newImagePath;
+        },
+        100
+      )
+    }
+  });
+
+  var bindImage9 = new Vue({
+    el: '#col9',
+    data: {
+      imageLink9: "/static/images/card-back-default.png",
+      cardSelector: ""
+    },
+    watch: {
+      cardSelector: function(newCardImage){
+        console.log("function triggered");
+        this.getImage()
+      }
+    },
+    methods:{
+      getImage: _.debounce(
+        function(){
+          console.log("function triggered");
+          console.log(document.getElementById("input9").value);
+          if (document.getElementById("input9").value != ""){
+            //console.log(i + " is good");
+            var newImage = JSON.search(cards, '//*[contains(name, "' + document.getElementById("input9").value + '")]');
+            //console.log(newImage[0].cardId);
+            var newImagePath = "/static/images/card_images/" + newImage[0].cardId + ".png";
+            console.log(newImagePath);
+
+          }
+
+          this.imageLink9 = newImagePath;
+        },
+        100
+      )
+    }
+  });
+
 
   var msg = {msg: 'Vue.js is rad'};
   var output = new Vue({ el: '#test', data: msg});
