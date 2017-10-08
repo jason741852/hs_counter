@@ -64,12 +64,12 @@ $(document).ready(function(e) {
   for(j=0; j<10; j++){
     if(j%5 == 0){
       var row_div = document.createElement("div");
-      row_div.setAttribute('class', 'row top-buffer');
+      row_div.setAttribute('class', 'row bottom-buffer');
       parent.appendChild(row_div);
     }
     var col_div = document.createElement("div");
     var col_id = 'col'+j.toString();
-    col_div.setAttribute('class', 'col-lg-15');
+    col_div.setAttribute('class', 'col-lg-15 side-buffer');
     col_div.setAttribute('id', col_id);
     row_div.appendChild(col_div);
 
@@ -83,11 +83,13 @@ $(document).ready(function(e) {
     input.setAttribute('id', input_id);
     input.setAttribute('v-model', "cardSelector");
     input.setAttribute('list', 'card-name-list')
+    input.setAttribute('style', "margin-bottom:5px; margin-left:auto; margin-right:auto; display:block;")
     col_div.appendChild(input);
     col_div.appendChild(datalist);
 
     img.setAttribute('id', img_id);
     img.setAttribute('class', "img-fluid");
+    img.setAttribute('style', "max-width:250px; margin-left:auto; margin-right:auto; display:block;")
     img.setAttribute(':src', img_src);
     //img.setAttribute('src', "/static/images/card-back-default.png");
     col_div.appendChild(img);
@@ -113,16 +115,17 @@ $(document).ready(function(e) {
         function(){
           console.log("function triggered");
           console.log(document.getElementById("input0").value);
-          if (document.getElementById("input0").value != ""){
-            //console.log(i + " is good");
-            var newImage = JSON.search(cards, '//*[contains(name, "' + document.getElementById("input0").value + '")]');
-            //console.log(newImage[0].cardId);
-            var newImagePath = "/static/images/card_images/" + newImage[0].cardId + ".png";
-            console.log(newImagePath);
 
+          var newImage = JSON.search(cards, '//*[contains(name, "' + document.getElementById("input0").value + '")]');
+          if (newImage.length == 0 || document.getElementById("input0").value==""){
+            console.log("Card undefined");
+            this.imageLink0 = "/static/images/card-back-default.png";
           }
-
-          this.imageLink0 = newImagePath;
+          else{
+            var newImagePath = "/static/images/card_images/" + newImage[0].cardId + ".png";
+            console.log("Found card image");
+            this.imageLink0 = newImagePath;
+          }
         },
         100
       )
@@ -146,13 +149,15 @@ $(document).ready(function(e) {
         function(){
           console.log("function triggered");
           console.log(document.getElementById("input1").value);
-          if (document.getElementById("input1").value != ""){
-            //console.log(i + " is good");
-            var newImage = JSON.search(cards, '//*[contains(name, "' + document.getElementById("input1").value + '")]');
-            //console.log(newImage[0].cardId);
+          var newImage = JSON.search(cards, '//*[contains(name, "' + document.getElementById("input1").value + '")]');
+          if (newImage.length == 0 || document.getElementById("input1").value==""){
+            console.log("Card undefined");
+            this.imageLink1 = "/static/images/card-back-default.png";
+          }
+          else{
             var newImagePath = "/static/images/card_images/" + newImage[0].cardId + ".png";
-            console.log(newImagePath);
-
+            console.log("Found card image");
+            this.imageLink1 = newImagePath;
           }
 
           this.imageLink1 = newImagePath;
@@ -179,13 +184,15 @@ $(document).ready(function(e) {
         function(){
           console.log("function triggered");
           console.log(document.getElementById("input2").value);
-          if (document.getElementById("input2").value != ""){
-            //console.log(i + " is good");
-            var newImage = JSON.search(cards, '//*[contains(name, "' + document.getElementById("input2").value + '")]');
-            //console.log(newImage[0].cardId);
+          var newImage = JSON.search(cards, '//*[contains(name, "' + document.getElementById("input2").value + '")]');
+          if (newImage.length == 0 || document.getElementById("input2").value==""){
+            console.log("Card undefined");
+            this.imageLink2 = "/static/images/card-back-default.png";
+          }
+          else{
             var newImagePath = "/static/images/card_images/" + newImage[0].cardId + ".png";
-            console.log(newImagePath);
-
+            console.log("Found card image");
+            this.imageLink2 = newImagePath;
           }
 
           this.imageLink2 = newImagePath;
@@ -212,13 +219,15 @@ $(document).ready(function(e) {
         function(){
           console.log("function triggered");
           console.log(document.getElementById("input3").value);
-          if (document.getElementById("input3").value != ""){
-            //console.log(i + " is good");
-            var newImage = JSON.search(cards, '//*[contains(name, "' + document.getElementById("input3").value + '")]');
-            //console.log(newImage[0].cardId);
+          var newImage = JSON.search(cards, '//*[contains(name, "' + document.getElementById("input3").value + '")]');
+          if (newImage.length == 0 || document.getElementById("input3").value==""){
+            console.log("Card undefined");
+            this.imageLink3 = "/static/images/card-back-default.png";
+          }
+          else{
             var newImagePath = "/static/images/card_images/" + newImage[0].cardId + ".png";
-            console.log(newImagePath);
-
+            console.log("Found card image");
+            this.imageLink3 = newImagePath;
           }
 
           this.imageLink3 = newImagePath;
@@ -245,13 +254,15 @@ $(document).ready(function(e) {
         function(){
           console.log("function triggered");
           console.log(document.getElementById("input4").value);
-          if (document.getElementById("input4").value != ""){
-            //console.log(i + " is good");
-            var newImage = JSON.search(cards, '//*[contains(name, "' + document.getElementById("input4").value + '")]');
-            //console.log(newImage[0].cardId);
+          var newImage = JSON.search(cards, '//*[contains(name, "' + document.getElementById("input4").value + '")]');
+          if (newImage.length == 0 || document.getElementById("input4").value==""){
+            console.log("Card undefined");
+            this.imageLink4 = "/static/images/card-back-default.png";
+          }
+          else{
             var newImagePath = "/static/images/card_images/" + newImage[0].cardId + ".png";
-            console.log(newImagePath);
-
+            console.log("Found card image");
+            this.imageLink4 = newImagePath;
           }
 
           this.imageLink4 = newImagePath;
@@ -278,13 +289,15 @@ $(document).ready(function(e) {
         function(){
           console.log("function triggered");
           console.log(document.getElementById("input5").value);
-          if (document.getElementById("input5").value != ""){
-            //console.log(i + " is good");
-            var newImage = JSON.search(cards, '//*[contains(name, "' + document.getElementById("input5").value + '")]');
-            //console.log(newImage[0].cardId);
+          var newImage = JSON.search(cards, '//*[contains(name, "' + document.getElementById("input5").value + '")]');
+          if (newImage.length == 0 || document.getElementById("input5").value==""){
+            console.log("Card undefined");
+            this.imageLink5 = "/static/images/card-back-default.png";
+          }
+          else{
             var newImagePath = "/static/images/card_images/" + newImage[0].cardId + ".png";
-            console.log(newImagePath);
-
+            console.log("Found card image");
+            this.imageLink5 = newImagePath;
           }
 
           this.imageLink5 = newImagePath;
@@ -311,13 +324,15 @@ $(document).ready(function(e) {
         function(){
           console.log("function triggered");
           console.log(document.getElementById("input6").value);
-          if (document.getElementById("input6").value != ""){
-            //console.log(i + " is good");
-            var newImage = JSON.search(cards, '//*[contains(name, "' + document.getElementById("input6").value + '")]');
-            //console.log(newImage[0].cardId);
+          var newImage = JSON.search(cards, '//*[contains(name, "' + document.getElementById("input6").value + '")]');
+          if (newImage.length == 0 || document.getElementById("input6").value==""){
+            console.log("Card undefined");
+            this.imageLink6 = "/static/images/card-back-default.png";
+          }
+          else{
             var newImagePath = "/static/images/card_images/" + newImage[0].cardId + ".png";
-            console.log(newImagePath);
-
+            console.log("Found card image");
+            this.imageLink6 = newImagePath;
           }
 
           this.imageLink6 = newImagePath;
@@ -344,13 +359,15 @@ $(document).ready(function(e) {
         function(){
           console.log("function triggered");
           console.log(document.getElementById("input7").value);
-          if (document.getElementById("input7").value != ""){
-            //console.log(i + " is good");
-            var newImage = JSON.search(cards, '//*[contains(name, "' + document.getElementById("input7").value + '")]');
-            //console.log(newImage[0].cardId);
+          var newImage = JSON.search(cards, '//*[contains(name, "' + document.getElementById("input7").value + '")]');
+          if (newImage.length == 0 || document.getElementById("input7").value==""){
+            console.log("Card undefined");
+            this.imageLink7 = "/static/images/card-back-default.png";
+          }
+          else{
             var newImagePath = "/static/images/card_images/" + newImage[0].cardId + ".png";
-            console.log(newImagePath);
-
+            console.log("Found card image");
+            this.imageLink7 = newImagePath;
           }
 
           this.imageLink7 = newImagePath;
@@ -377,13 +394,15 @@ $(document).ready(function(e) {
         function(){
           console.log("function triggered");
           console.log(document.getElementById("input8").value);
-          if (document.getElementById("input8").value != ""){
-            //console.log(i + " is good");
-            var newImage = JSON.search(cards, '//*[contains(name, "' + document.getElementById("input8").value + '")]');
-            //console.log(newImage[0].cardId);
+          var newImage = JSON.search(cards, '//*[contains(name, "' + document.getElementById("input8").value + '")]');
+          if (newImage.length == 0 || document.getElementById("input8").value==""){
+            console.log("Card undefined");
+            this.imageLink8 = "/static/images/card-back-default.png";
+          }
+          else{
             var newImagePath = "/static/images/card_images/" + newImage[0].cardId + ".png";
-            console.log(newImagePath);
-
+            console.log("Found card image");
+            this.imageLink8 = newImagePath;
           }
 
           this.imageLink8 = newImagePath;
@@ -410,13 +429,15 @@ $(document).ready(function(e) {
         function(){
           console.log("function triggered");
           console.log(document.getElementById("input9").value);
-          if (document.getElementById("input9").value != ""){
-            //console.log(i + " is good");
-            var newImage = JSON.search(cards, '//*[contains(name, "' + document.getElementById("input9").value + '")]');
-            //console.log(newImage[0].cardId);
+          var newImage = JSON.search(cards, '//*[contains(name, "' + document.getElementById("input9").value + '")]');
+          if (newImage.length == 0 || document.getElementById("input9").value==""){
+            console.log("Card undefined");
+            this.imageLink9 = "/static/images/card-back-default.png";
+          }
+          else{
             var newImagePath = "/static/images/card_images/" + newImage[0].cardId + ".png";
-            console.log(newImagePath);
-
+            console.log("Found card image");
+            this.imageLink9 = newImagePath;
           }
 
           this.imageLink9 = newImagePath;
@@ -428,7 +449,7 @@ $(document).ready(function(e) {
 
 
   var msg = {msg: 'Vue.js is rad'};
-  var output = new Vue({ el: '#test', data: msg});
+  var output = new Vue({ el: '#output_text', data: msg});
 
 
     $('form#cards_in_hands').submit(function() {
