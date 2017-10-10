@@ -11,14 +11,13 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript" src="/static/js/lodash.min.js"></script>
   <script src="https://unpkg.com/vue"></script>
-
+  <link rel="stylesheet" type="text/css" href="/static/css/custom.css">
   <script type="text/javascript" src="/static/js/defiant.min.js"></script>
   <script type="text/javascript" src="/static/bootstrap/js/popper.min.js"></script>
   <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
   <link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-grid.min.css">
   <link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-reboot.min.css">
   <link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="/static/css/custom.css">
   <link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet">
 
 </head>
@@ -26,7 +25,7 @@
 <body>
   <!--------------------------------- NavBar Section --------------------------------->
   <nav class="navbar navbar-light bg-faded">
-    <h1 class="navbar-brand" href="#" style="color: white; font-family: 'Oxygen', sans-serif;">Anduin Damage Calculator</h1>
+    <h1 id="navBar" class="navbar-brand" href="#">Anduin Damage Calculator</h1>
   </nav>
 
   <div class="container-fluid" style="max-width:1600px">
@@ -43,7 +42,7 @@
     </form>
     <div class="row text_block">
       <div class="col">
-        <p class="output" id="output_text">Message: {{ msg }}</p>
+        <p class="output" id="output_text">{{ msg }}</p>
       </div>
     </div>
   </div>
