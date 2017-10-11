@@ -25,7 +25,7 @@
 <body>
   <!--------------------------------- NavBar Section --------------------------------->
   <nav class="navbar navbar-light bg-faded">
-    <h1 id="navBar" class="navbar-brand" href="#">Anduin Damage Calculator</h1>
+    <h1 id="navBar" class="navbar-brand" href="#">HS</h1>
   </nav>
 
   <div class="container-fluid" style="max-width:1600px">
@@ -41,8 +41,8 @@
       </div>
     </form>
     <div class="row text_block">
-      <div class="col">
-        <p class="output" id="output_text">{{ msg }}</p>
+      <div class="col" id="output_box">
+        <div class="output" id="output_text"  v-html="msg"></div>
       </div>
     </div>
   </div>

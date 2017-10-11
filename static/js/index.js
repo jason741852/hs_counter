@@ -404,11 +404,19 @@ $(document).ready(function(e) {
     });
 
 
-    var msg = {msg: 'OUTPUT'};
-    var output = new Vue({ el: '#output_text', data: msg});
+    var msg = {msgg: 'OUTPUT'};
+    //var output = new Vue({ el: '#output_text', data: msgg
+
+    var app = new Vue({
+      el: '#output_box',
+      data: {
+        msg: 'HI'
+      }
+    });
 
 
     $('form#cards_in_hands').submit(function() {
+      app.msg = "Calculating damage..";
       var hand = new Array;
       var hand_test = new Array;
       hand = hand.concat(hand);
@@ -422,10 +430,14 @@ $(document).ready(function(e) {
         }
       }
       // Assume void form costs 0 for now
-      calculate_damage(hand, 0);
-       msg.msg = "Calculating damage..";
+      var output_info = calculate_damage(hand, 0);
+
+      app.msg = print_output(output_info[0], output_info[1]);
+
+
+
     });
-    }); // data_fetch.done()
+  }); // data_fetch.done()
 }) // windows.ready()
 
 
@@ -496,6 +508,7 @@ function calculate_damage(hand, void_form_cost){
 
   var burn_spells = SortBurnSpells(burn_spells);
 
+
   printDividedHand(spell_damage_minions, spell_reduction_minions, burn_spells, general_cards, velen);
 
   // play order would be velen -> spell_reduction_minions -> spell_damage_minions -> burn_spells -> general_cards
@@ -515,6 +528,7 @@ function calculate_damage(hand, void_form_cost){
   var loop_breaker = 0;
   var d, r, b, g, v = 0; // cards counter
   var spells_info; // [0] == damage, [1] == mana cost
+  var spell_cost_reduction_count = 0;
   var no_spells_left = false;
   var velen_in_queue = false;
 
@@ -531,7 +545,7 @@ function calculate_damage(hand, void_form_cost){
     }
 
 
-
+    console.log(burn_spells != "" && A_remaining_mana >= 7 && velen != "");
 
     if(burn_spells == "" && velen != ""){
       var card_played = velen.shift();
@@ -547,8 +561,49 @@ function calculate_damage(hand, void_form_cost){
       A_remaining_mana-=card_played.cost;
       A_play_queue.push(card_played);
     }
-    else if(burn_spells != "" && velen != ""){
-      
+    else if(burn_spells != "" && A_remaining_mana >= 7 && velen != ""){
+      // Look ahead???
+      var spell_damage_without_velen = AvailableBurnDamage(burn_spells, A_remaining_mana, 1);
+      console.log("spell_damage_without_velen: ", spell_damage_without_velen);
+      var spell_damage_with_velen = AvailableBurnDamage(burn_spells, A_remaining_mana - velen[0].cost, 2);
+      console.log("spell_damage_with_velen: ", spell_damage_with_velen);
+      if(spell_damage_without_velen[0] > spell_damage_with_velen[0]){
+        var card_played = burn_spells.shift();
+        A_remaining_mana-=card_played.cost;
+        A_play_queue.push(card_played);
+      }
+      else{
+        console.log("HIEE");
+        var card_played = velen.shift();
+        A_remaining_mana-=card_played.cost;
+        A_play_queue.push(card_played);
+      }
+    }
+    else if(spell_damage_minions == "" && spell_reduction_minions == "" && burn_spells != ""){
+       var card_played = burn_spells.shift();
+       A_remaining_mana-=card_played.cost;
+       A_play_queue.push(card_played);
+    }
+    else if(spell_damage_minions == "" && spell_reduction_minions != "" && burn_spells != ""){
+      if(A_remaining_mana == burn_spells[0].cost+1  || (burn_spells.length >= 2 && burn_spells[0].cost + burn_spells[1].cost <= A_remaining_mana) || burn_spells[0].cost == 1){
+        var card_played = spell_reduction_minions.shift();
+        // lower the cost of spells after spell reduction minion is played
+        for(var ii = 0; ii < burn_spells.length; ii++){
+          burn_spells[ii].cost--;
+        }
+        spell_cost_reduction_count++;
+        A_remaining_mana-=card_played.cost;
+        A_play_queue.push(card_played);
+      }
+      else{
+        var card_played = burn_spells.shift();
+        if(card_played.type == "Spell") card_played.cost-=spell_cost_reduction_count; // lower the cost of spells after spell reduction minion is played
+        A_remaining_mana-=card_played.cost;
+        A_play_queue.push(card_played);
+      }
+    }
+    else if(spell_damage_minions != "" && spell_reduction_minions == "" && burn_spells != ""){
+
     }
 
 
@@ -563,15 +618,40 @@ function calculate_damage(hand, void_form_cost){
 
   printPlayQueue(A_play_queue);
 
+  A_void_form_damage = 2;
+  var velenBonus = false;
+  var spellDamageBonus = 0;
+  for(var i = 0; i < A_play_queue.length; i++){
+    if(A_play_queue[i].name == "Prophet Velen") velenBonus = true;
+
+    if(A_play_queue[i].type == "Spell" && A_play_queue[i].text.search("damage") != -1 && A_play_queue[i].text.search("minion") == -1){
+      if(velenBonus) A_damage_counter += 2*SpellDamageCalculate(A_play_queue[i], spellDamageBonus);
+      else A_damage_counter += SpellDamageCalculate(A_play_queue[i], spellDamageBonus);
+      console.log("damage from spell: ", A_damage_counter);
+    }
+
+    if(spell_damage_list.includes(A_play_queue[i].name)){
+      spellDamageBonus++;
+    }
+
+    if(velenBonus) A_damage_counter+=A_void_form_damage*2;
+    else A_damage_counter+=A_void_form_damage;
+    console.log("damage: ", A_damage_counter);
+  } // END for
+
+  console.log("Total damage: ", A_damage_counter);
+
+  return [A_play_queue, A_damage_counter];
+
 } // End calculate_damage()
 
 
 function GroupGeneralCards(general_cards, general_cards_when_no_spells){
   general_cards.splice(0, general_cards.length);
   return general_cards_when_no_spells;
-}
+} // END GroupGeneralCards()
 
-function AvailableBurnDamage(burn_spells, remaining_mana){
+function AvailableBurnDamage(burn_spells, remaining_mana, velenBonus){
   if(burn_spells == "") return 0;
   else{
     var i = 0;
@@ -579,7 +659,7 @@ function AvailableBurnDamage(burn_spells, remaining_mana){
     var remaining_mana_reversed = remaining_mana;
     while(i < burn_spells.length && remaining_mana >= burn_spells[i].cost){
       console.log("hi");
-      total_damage+=SpellDamageCalculate(burn_spells[i], 0);
+      total_damage+=SpellDamageCalculate(burn_spells[i], 0)*velenBonus;
       remaining_mana = remaining_mana - burn_spells[i].cost;
       i++;
     }
@@ -589,7 +669,7 @@ function AvailableBurnDamage(burn_spells, remaining_mana){
     var total_damage_reversed = 0;
     while(j >= 0 && remaining_mana_reversed >= burn_spells[j].cost){
       console.log("remaining_mana_reversed: ", remaining_mana_reversed);
-      total_damage_reversed+=SpellDamageCalculate(burn_spells[j], 0);
+      total_damage_reversed+=SpellDamageCalculate(burn_spells[j], 0)*velenBonus;
       remaining_mana_reversed = remaining_mana_reversed - burn_spells[j].cost;
       j--;
     }
@@ -598,7 +678,7 @@ function AvailableBurnDamage(burn_spells, remaining_mana){
 
     return [Math.max(total_damage, total_damage_reversed), i];
   }
-}
+} // END AvailableBurnDamage()
 
 function SortBurnSpells(burn_spells){
   if(burn_spells == "" || burn_spells.length == 1) return burn_spells;
@@ -613,7 +693,22 @@ function SortBurnSpells(burn_spells){
     }
     return burn_spells;
   }
-}
+} // END SortBurnSpells()
+
+function print_output(play_order, total_damage){
+  var msg;
+  msg = "<p> Your hand's total damage is <strong>" + total_damage + "</strong></p>";
+  msg+="<div id=\"cardOrderList\">";
+  for(var i=0; i < play_order.length; i++){
+    var newImagePath = "/static/images/card_images/" + play_order[i].cardId + ".png";
+    var imgTag = "<img class=\"card\" src = \"" +  newImagePath + "\">";
+    var arrow = "<img class=\"arrow\" src = \"/static/images/arrow.png\">";
+    msg+= imgTag;
+    if(i != play_order.length-1) msg+=arrow;
+  }
+  msg+="</div>";
+  return msg;
+} // END print_output()
 
 
 // TO CALL:
@@ -644,7 +739,7 @@ function printHand(hand){
     consoleLog += hand[i].name + ", ";
   }
   console.log(consoleLog);
-}
+} // END printHand()
 
 function printDividedHand(spell_damage_minions, spell_reduction_minions, burn_spells, general_cards, velen){
   console.log("--------printDividedHand---------");
@@ -675,7 +770,7 @@ function printDividedHand(spell_damage_minions, spell_reduction_minions, burn_sp
   }
   console.log("velen: ", consoleLog);
   console.log("--------printDividedHand---------");
-}
+} // END printDividedHand()
 
 function printLoopHead(remaining_mana, playable_cards_exists, A_play_queue){
   console.log("---------printLoopHead--------");
@@ -687,7 +782,7 @@ function printLoopHead(remaining_mana, playable_cards_exists, A_play_queue){
   }
   console.log("Play Queue: ", consoleLog);
   console.log("---------printLoopHead--------");
-}
+} // END printLoopHead()
 
 function printPlayQueue(arr){
   console.log("---------printPlayQueue--------");
@@ -697,4 +792,4 @@ function printPlayQueue(arr){
   }
   console.log("Play Order: ", consoleLog);
   console.log("---------printPlayQueue--------");
-}
+} // END printPlayQueue()
