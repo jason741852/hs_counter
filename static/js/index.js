@@ -533,8 +533,9 @@ function calculate_damage(hand, void_form_cost){
   var velen_in_queue = false;
 
   // main loop
+  var a = 0;
   while(playable_cards_exists == true){
-    //printLoopHead(A_remaining_mana, playable_cards_exists, A_play_queue);
+    printDividedHand(spell_damage_minions, spell_reduction_minions, burn_spells, general_cards, velen);
     // spells_info = AvailableBurnDamage(burn_spells, 2);
     // console.log(spells_info);
 
@@ -545,8 +546,6 @@ function calculate_damage(hand, void_form_cost){
     }
 
 
-    console.log(burn_spells != "" && A_remaining_mana >= 7 && velen != "");
-
     if(burn_spells == "" && velen != ""){
       var card_played = velen.shift();
       A_remaining_mana-=card_played.cost;
@@ -555,8 +554,11 @@ function calculate_damage(hand, void_form_cost){
     else if(burn_spells == "" && velen == ""){
       if(no_spells_left == false){
         general_cards = GroupGeneralCards(general_cards, general_cards_when_no_spells);
+        spell_reduction_minions = [];
+        spell_damage_minions = [];
         no_spells_left = true;
       };
+
       var card_played = general_cards.shift();
       A_remaining_mana-=card_played.cost;
       A_play_queue.push(card_played);
@@ -573,7 +575,6 @@ function calculate_damage(hand, void_form_cost){
         A_play_queue.push(card_played);
       }
       else{
-        console.log("HIEE");
         var card_played = velen.shift();
         A_remaining_mana-=card_played.cost;
         A_play_queue.push(card_played);
@@ -586,6 +587,7 @@ function calculate_damage(hand, void_form_cost){
     }
     else if(spell_damage_minions == "" && spell_reduction_minions != "" && burn_spells != ""){
       if(A_remaining_mana == burn_spells[0].cost+1  || (burn_spells.length >= 2 && burn_spells[0].cost + burn_spells[1].cost <= A_remaining_mana) || burn_spells[0].cost == 1){
+        console.log("ASAS");
         var card_played = spell_reduction_minions.shift();
         // lower the cost of spells after spell reduction minion is played
         for(var ii = 0; ii < burn_spells.length; ii++){
@@ -596,6 +598,7 @@ function calculate_damage(hand, void_form_cost){
         A_play_queue.push(card_played);
       }
       else{
+        console.log("eee");
         var card_played = burn_spells.shift();
         if(card_played.type == "Spell") card_played.cost-=spell_cost_reduction_count; // lower the cost of spells after spell reduction minion is played
         A_remaining_mana-=card_played.cost;
@@ -605,6 +608,10 @@ function calculate_damage(hand, void_form_cost){
     else if(spell_damage_minions != "" && spell_reduction_minions == "" && burn_spells != ""){
 
     }
+    else{
+
+    }
+    //console.log("card_played: ", card_played.name);
 
 
 
@@ -619,6 +626,7 @@ function calculate_damage(hand, void_form_cost){
   printPlayQueue(A_play_queue);
 
   A_void_form_damage = 2;
+  A_damage_counter += A_void_form_damage;
   var velenBonus = false;
   var spellDamageBonus = 0;
   for(var i = 0; i < A_play_queue.length; i++){
@@ -701,7 +709,7 @@ function print_output(play_order, total_damage){
   msg+="<div id=\"cardOrderList\">";
   for(var i=0; i < play_order.length; i++){
     var newImagePath = "/static/images/card_images/" + play_order[i].cardId + ".png";
-    var imgTag = "<img class=\"card\" src = \"" +  newImagePath + "\">";
+    var imgTag = "<img class=\"card img-fluid\" src = \"" +  newImagePath + "\">";
     var arrow = "<img class=\"arrow\" src = \"/static/images/arrow.png\">";
     msg+= imgTag;
     if(i != play_order.length-1) msg+=arrow;
