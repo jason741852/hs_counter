@@ -33,11 +33,7 @@ body{
 
 }
 
-/*@media (min-width: 1200px) {
-    .container{
-        max-width: 970px;
-    }
-}*/
+/* grid 5 columns*/
 
 .col-xs-15,
 .col-sm-15,
@@ -71,6 +67,39 @@ body{
         width: 20%;
         float: left;
     }
+}
+
+/* grid 10 columns*/
+.col-xs-1-10,
+.col-sm-1-10 {
+  position: relative;
+  min-height: 1px;
+}
+
+.col-xs-1-10 {
+  width: 10%;
+  float: left;
+}
+
+@media (min-width: 768px) {
+  .col-sm-1-10 {
+    width: 10%;
+    float: left;
+  }
+}
+
+@media (min-width: 992px) {
+  .col-md-1-10 {
+    width: 10%;
+    float: left;
+  }
+}
+
+@media (min-width: 1200px) {
+  .col-lg-1-10 {
+    width: 10%;
+    float: left;
+  }
 }
 
 .container-fluid{
@@ -131,7 +160,7 @@ body{
   margin: auto auto;
 }
 
-#output_text{
+.output_text{
   background-color: #443420;
   border-color: rgba(255,255,255,.15);
   border-style: solid;
@@ -145,7 +174,18 @@ body{
   display:block;
 }
 
-#cardOrderList .arrow{
+.cardOrderList .arrow{
   max-width: 50px;
   max-height: auto;
 }
+
+.card{
+  background-color: transparent!important;
+  border: none!important;
+  max-height: 50%;
+  max-width: 50%;
+}
+
+.img-responsive {
+     margin: 0 auto;
+ }

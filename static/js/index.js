@@ -620,7 +620,7 @@ function calculate_damage(hand, void_form_cost){
 
     // temp loop breaker
     loop_breaker++;
-    if(loop_breaker==8) break;
+    if(loop_breaker==11) break;
   } // END while
 
   printPlayQueue(A_play_queue);
@@ -705,15 +705,22 @@ function SortBurnSpells(burn_spells){
 
 function print_output(play_order, total_damage){
   var msg;
-  msg = "<p> Your hand's total damage is <strong>" + total_damage + "</strong></p>";
-  msg+="<div id=\"cardOrderList\">";
+  msg = "<div class=\"row text_block\" id=\"instruction\"><p> Your hand's total damage is <strong>" + total_damage + "</strong></p></div>";
+  //msg+="<div id=\"cardOrderList\">";
+  msg+="<div class=\"row\">";
   for(var i=0; i < play_order.length; i++){
+    msg+="<div class=\"cardOrderList col-lg-1\">";
     var newImagePath = "/static/images/card_images/" + play_order[i].cardId + ".png";
     var imgTag = "<img class=\"card img-fluid\" src = \"" +  newImagePath + "\">";
-    var arrow = "<img class=\"arrow\" src = \"/static/images/arrow.png\">";
+    var arrow = "<img class=\"arrow img-fluid center-block\" src = \"/static/images/arrow.png\" style=\"padding-top: 50%;\">";
     msg+= imgTag;
-    if(i != play_order.length-1) msg+=arrow;
-  }
+    msg+="</div>";
+    if(i != play_order.length-1) {
+      msg+="<div class=\"cardOrderList col-lg-1\" style=\"text-align: center;\">";
+      msg+=arrow;
+      msg+="</div>";
+    }
+  } // END for
   msg+="</div>";
   return msg;
 } // END print_output()

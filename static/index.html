@@ -29,22 +29,24 @@
   </nav>
 
   <div class="container-fluid" style="max-width:1600px">
-    <div class="row text_block" id="instruction">
+    <div class=" text_block" id="instruction">
       <p>Fill out the cards you have to calculate the damage from hand</p>
     </div>
 
     <form id="cards_in_hands" onsubmit="return false">
       <div id="card_inputs">
       </div>
-      <div class="row bottom-buffer">
+      <!-- <div class="row bottom-buffer"> -->
+      <div class="row">
         <input id="submit" type="submit" value="calculate" href="/" class="output">
       </div>
+      <!-- </div> -->
     </form>
-    <div class="row text_block">
-      <div class="col" id="output_box">
-        <div class="output" id="output_text"  v-html="msg"></div>
-      </div>
-    </div>
+    <!-- <div class="row text_block"> -->
+
+        <div class="text_block output output_text" id="output_box"  v-html="msg"></div>
+
+    <!-- </div> -->
   </div>
 
 
