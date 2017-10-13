@@ -705,7 +705,7 @@ function SortBurnSpells(burn_spells){
 
 function print_output(play_order, total_damage){
   var msg;
-  msg = "<div class=\"row text_block\" id=\"instruction\"><p> Your hand's total damage is <strong>" + total_damage + "</strong></p></div>";
+  msg = "<div class=\"row text_block\" id=\"instruction\"><p> Your hand's total damage is <strong>" + total_damage + ".</strong></p></div><div class=\"row text_block\" id=\"instruction\"><p>Play in this order:</p></div>";
   //msg+="<div id=\"cardOrderList\">";
   msg+="<div class=\"row\">";
   for(var i=0; i < play_order.length; i++){
