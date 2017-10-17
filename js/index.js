@@ -410,7 +410,7 @@ $(document).ready(function(e) {
     var app = new Vue({
       el: '#output_box',
       data: {
-        msg: 'HI'
+        msg: '<div class=\"row text_block\" id=\"instruction\"><p>--Output Section--</p></div><div class=\"row text_block\" id=\"instruction\"></div>'
       }
     });
 
@@ -666,7 +666,6 @@ function AvailableBurnDamage(burn_spells, remaining_mana, velenBonus){
     var total_damage = 0;
     var remaining_mana_reversed = remaining_mana;
     while(i < burn_spells.length && remaining_mana >= burn_spells[i].cost){
-      console.log("hi");
       total_damage+=SpellDamageCalculate(burn_spells[i], 0)*velenBonus;
       remaining_mana = remaining_mana - burn_spells[i].cost;
       i++;
@@ -676,7 +675,6 @@ function AvailableBurnDamage(burn_spells, remaining_mana, velenBonus){
     var j = burn_spells.length - 1;
     var total_damage_reversed = 0;
     while(j >= 0 && remaining_mana_reversed >= burn_spells[j].cost){
-      console.log("remaining_mana_reversed: ", remaining_mana_reversed);
       total_damage_reversed+=SpellDamageCalculate(burn_spells[j], 0)*velenBonus;
       remaining_mana_reversed = remaining_mana_reversed - burn_spells[j].cost;
       j--;
