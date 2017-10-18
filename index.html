@@ -19,6 +19,8 @@
   <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-reboot.min.css">
   <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet">
+  <link rel="shortcut icon" type="image/png" href="images/favicon.png"/>
+
 
 </head>
 
@@ -26,30 +28,30 @@
   <img src="images/background.jpg" id="bg" alt="">
   <!--------------------------------- NavBar Section --------------------------------->
   <nav class="navbar navbar-light bg-faded">
-    <h1 id="navBar" class="navbar-brand" href="#">HS</h1>
+    <h1 id="navBar" class="navbar-brand" href="#">Void Form Damage Calculator for <strong>Hearthstone</strong></h1>
   </nav>
 
 
 
   <div class="container-fluid" style="max-width:1600px">
     <div class=" row text_block" id="instruction">
-      <p>Fill out the cards you have to calculate the damage from hand</p>
+      <p>This app calculates the maximum damage you have from hand along with 0-cost voidform,
+      assuming all cards are playable.
+      Fill out the cards you have.</p>
     </div>
 
     <form id="cards_in_hands" onsubmit="return false">
       <div id="card_inputs">
       </div>
       <!-- <div class="row bottom-buffer"> -->
-      <div class="row">
+      <div class="row bottom-buffer">
         <input id="submit" type="submit" value="calculate" href="/" class="output">
       </div>
       <!-- </div> -->
     </form>
-    <!-- <div class="row text_block"> -->
 
-        <div class="text_block output output_text" id="output_box"  v-html="msg"></div>
+    <div class="text_block output output_text" id="output_box"  v-html="msg"></div>
 
-    <!-- </div> -->
   </div>
 
   <script type="text/javascript" src="js/background.js"></script>
