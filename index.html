@@ -12,6 +12,7 @@
   <script type="text/javascript" src="js/lodash.min.js"></script>
   <script src="https://unpkg.com/vue"></script>
   <link rel="stylesheet" type="text/css" href="css/custom.css">
+  <link rel="stylesheet" type="text/css" href="css/footer.css">
   <script type="text/javascript" src="js/defiant.min.js"></script>
   <script type="text/javascript" src="bootstrap/js/popper.min.js"></script>
   <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
@@ -29,11 +30,14 @@
   <!--------------------------------- NavBar Section --------------------------------->
   <nav class="navbar navbar-light bg-faded">
     <h1 id="navBar" class="navbar-brand" href="#">Void Form Damage Calculator for <strong>Hearthstone</strong></h1>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="https://github.com/jason741852/hs_counter"><img id="fork" src="images/GH_fork.png"></a></li>
+    </ul>
   </nav>
 
 
 
-  <div class="container-fluid" style="max-width:1600px">
+  <div class="container-fluid bottom-buffer" style="max-width:1600px">
     <div class=" row text_block" id="instruction">
       <p>This app calculates the maximum damage you have from hand along with 0-cost voidform,
       assuming all cards are playable.
@@ -50,9 +54,22 @@
       <!-- </div> -->
     </form>
 
-    <div class="text_block output output_text" id="output_box"  v-html="msg"></div>
+    <div class="text_block output output_text bottom-buffer" id="output_box"  v-html="msg"></div>
+
 
   </div>
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <span>Check out my other projects on <a class="footer-link" href="https://github.com/jason741852/">GitHub</a> and my <a class="footer-link" href="http://www.jasonkschan.com/">website</a></span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
 
   <script type="text/javascript" src="js/background.js"></script>
   <script type="text/javascript" src="js/index.js"></script>

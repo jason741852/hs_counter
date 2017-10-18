@@ -3,18 +3,6 @@ body, html {
 }
 
 
-/*body{
-  background-image: url("../images/background.jpg");
-  /* Full height */
-  /*height: 100%;*/
-
-  /* Center and scale the image nicely */
-  /*background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  font-family: 'Oxygen', sans-serif;
-}*/
-
 #bg { position: fixed; top: 0; left: 0; z-index: -1;}
 .bgwidth { width: 100%; }
 .bgheight { height: 100%; }
@@ -38,8 +26,15 @@ p{
   text-shadow: 0 0 4px #000, 0 0 8px #000;
   font-size: 20px;
   font-size: 1.25rem;
-
 }
+
+#fork{
+  background-color: transparent!important;
+  height: 60px;
+  width: auto;
+}
+
+
 
 /* grid 5 columns*/
 
