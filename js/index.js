@@ -64,16 +64,16 @@ $(document).ready(function(e) {
     }
 
     var parent = document.getElementById("card_inputs");
+    var row_div = document.createElement("div");
+    row_div.setAttribute('class', 'row bottom-buffer');
+    parent.appendChild(row_div);
+
     for(j=0; j<10; j++){
-      if(j%5 == 0){
-        var row_div = document.createElement("div");
-        row_div.setAttribute('class', 'row bottom-buffer');
-        parent.appendChild(row_div);
-      }
       var col_div = document.createElement("div");
       var col_id = 'col'+j.toString();
       col_div.setAttribute('class', 'col-lg-15 side-buffer');
       col_div.setAttribute('id', col_id);
+      //parent.appendChild(col_div);
       row_div.appendChild(col_div);
 
       var img = document.createElement("img");
@@ -710,7 +710,7 @@ function print_output(play_order, total_damage){
     msg+="<div class=\"cardOrderList col-lg-1\">";
     var newImagePath = "images/card_images/" + play_order[i].cardId + ".png";
     var imgTag = "<img class=\"card img-fluid\" src = \"" +  newImagePath + "\">";
-    var arrow = "<img class=\"arrow img-fluid center-block\" src = \"/images/arrow.png\" style=\"padding-top: 50%;\">";
+    var arrow = "<img class=\"arrow img-fluid center-block\" src = \"/images/arrow.png\" >";
     msg+= imgTag;
     msg+="</div>";
     if(i != play_order.length-1) {
